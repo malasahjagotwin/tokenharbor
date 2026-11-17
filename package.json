@@ -1,0 +1,8 @@
+{
+  "name": "tokenharbor-automation",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "create": "node create-account.js"
+  }
+}
