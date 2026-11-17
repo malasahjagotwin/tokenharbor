@@ -1,5 +1,19 @@
 #!/usr/bin/env node
-const { chromium } = require('playwright-core');
+let chromium;
+try {
+  ({ chromium } = require('playwright-core'));
+} catch {
+  for (const p of [
+    '/mnt/scratch/tmp/opencode/pw/node_modules',
+    '/mnt/pid2/node_modules',
+  ]) {
+    try { ({ chromium } = require(require.resolve('playwright-core', { paths: [p] }))); break; } catch {}
+  }
+}
+if (!chromium) {
+  console.error('playwright-core not found. Set NODE_PATH or install it.');
+  process.exit(1);
+}
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
